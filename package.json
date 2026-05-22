@@ -1,0 +1,10 @@
+{
+  "name": "mbcorai-packages",
+
+  "private": true,
+
+  "workspaces": [
+
+    "language-switcher"
+  ]
+}

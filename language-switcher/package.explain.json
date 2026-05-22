@@ -1,0 +1,72 @@
+{
+  "_global_comment": "Ce fichier sert uniquement de documentation pédagogique pour comprendre le package.json. Il n'est pas utilisé par npm.",
+
+  "name": "@mbcorai/language-switcher",
+
+  "_comment_name": "Nom officiel du package publié sur npm. Le scope @mathieu_baba correspond au nom du compte npm propriétaire du package.",
+
+  "version": "1.0.0",
+
+  "_comment_version": "Version actuelle du package. À chaque nouvelle publication npm, cette version doit être augmentée.",
+
+  "description": "Language switcher package for React and Next.js",
+
+  "_comment_description": "Description affichée sur npmjs.com et utile pour comprendre rapidement le rôle du package.",
+
+  "main": "dist/index.js",
+
+  "_comment_main": "Point d'entrée principal du package après le build TypeScript. Les applications utiliseront ce fichier automatiquement lors des imports.",
+
+  "types": "dist/index.d.ts",
+
+  "_comment_types": "Fichier de types TypeScript généré automatiquement. Permet l'autocomplétion et la vérification des types dans les projets qui installent le package.",
+
+  "scripts": {
+
+    "build": "tsc"
+  },
+
+  "_comment_scripts": "Les scripts npm permettent d'exécuter des commandes rapidement. Ici, 'npm run build' lance TypeScript pour compiler le package.",
+
+  "keywords": [
+    "react",
+    "nextjs",
+    "i18n",
+    "language-switcher"
+  ],
+
+  "_comment_keywords": "Mots-clés utilisés par npm pour améliorer la recherche du package.",
+
+  "author": "Mathieu Baba",
+
+  "_comment_author": "Nom de l'auteur du package.",
+
+  "license": "ISC",
+
+  "_comment_license": "Licence open source du package.",
+
+  "dependencies": {
+
+    "i18next": "^26.2.0",
+
+    "react-i18next": "^17.0.8"
+  },
+
+  "_comment_dependencies": "Les dépendances sont automatiquement installées lorsque quelqu'un installe le package. Ici, le package utilise i18next et react-i18next en interne.",
+
+  "peerDependencies": {
+
+    "react": "^19.0.0"
+  },
+
+  "_comment_peerDependencies": "Les peerDependencies indiquent que le projet client doit déjà posséder React. Cela évite les conflits avec plusieurs versions de React.",
+
+  "devDependencies": {
+
+    "@types/react": "^19.2.15",
+
+    "typescript": "^6.0.3"
+  },
+
+  "_comment_devDependencies": "Les devDependencies servent uniquement au développement du package. Elles ne seront pas installées chez les utilisateurs du package."
+}

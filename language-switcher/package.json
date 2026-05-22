@@ -1,0 +1,32 @@
+{
+  "name": "@mbcorai/language-switcher",
+  "version": "1.0.0",
+  "description": "Language switcher package for React and Next.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "i18n",
+    "language-switcher"
+  ],
+  "author": "Mathieu baba",
+  "license": "ISC",
+  "dependencies": {
+    "i18next": "^26.2.0",
+    "react-i18next": "^17.0.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.15",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "typescript": "^6.0.3"
+  }
+}

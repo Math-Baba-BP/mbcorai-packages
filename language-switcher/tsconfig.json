@@ -1,0 +1,45 @@
+{
+  // Configuration du compilateur TypeScript
+  "compilerOptions": {
+
+    // Version JavaScript finale générée après compilation
+    // ES2017 est moderne et compatible avec React/Next.js
+    "target": "ES2017",
+
+    // Système de modules utilisé
+    // ESNext est recommandé pour les projets modernes React
+    "module": "ESNext",
+
+    // Permet de compiler le JSX React
+    // Sans ça, les composants React ne fonctionneront pas
+    "jsx": "react-jsx",
+
+    // Génère automatiquement les fichiers .d.ts
+    // Très important pour les packages TypeScript
+    // Permet l'autocomplétion dans les projets clients
+    "declaration": true,
+
+    // Dossier final du build
+    // Tous les fichiers compilés seront placés dans dist/
+    "outDir": "./dist",
+
+    // Dossier source principal
+    // TypeScript compilera uniquement les fichiers de src/
+    "rootDir": "./src",
+
+    // Active les vérifications strictes TypeScript
+    // Permet d'éviter beaucoup de bugs
+    "strict": true,
+
+    // Améliore la compatibilité entre CommonJS et ES Modules
+    // Très utile avec les librairies npm
+    "esModuleInterop": true,
+
+    // Manière dont TypeScript résout les imports
+    // "node" utilise la logique classique de Node.js
+    "moduleResolution": "bundler"
+  },
+
+  // Indique quels dossiers/fichiers doivent être compilés
+  "include": ["src"]
+}
