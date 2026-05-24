@@ -7,7 +7,7 @@
 
   "version": "1.0.0",
 
-  "_comment_version": "Version actuelle du package. À chaque nouvelle publication npm, cette version doit être augmentée.",
+  "_comment_version": "Version actuelle du package sous format MAJOR(breaking changes.).MINOR(nouvelles fonctionnalités compatibles).PATCH(petits correctifs). À chaque nouvelle publication npm, cette version doit être augmentée.",
 
   "description": "Language switcher package for React and Next.js",
 
