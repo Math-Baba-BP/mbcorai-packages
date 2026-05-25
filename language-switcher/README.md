@@ -1,14 +1,14 @@
 # @mbcorai/language-switcher
 
-Un package simple et réutilisable pour gérer la langue et les traductions dans une application React / Next.js.
+A simple and reusable package for managing language and translations in a React/Next.js application.
 
-## Fonctionnalités
+## Features
 
-- Gestion globale de la langue
-- Composants réutilisables : `LanguageProvider`, `LanguageSwitcher`, `Translate`
-- Intégration avec i18next et react-i18next
-- Compatible avec Next.js App Router
-- API légère et facile à prendre en main
+- Comprehensive language management
+- Reusable components: `LanguageProvider`, `LanguageSwitcher`, `Translate`
+- Integration with i18next and react-i18next
+- Compatible with Next.js App Router
+- Lightweight and easy-to-use API
 
 ## Technologies
 
@@ -25,7 +25,7 @@ npm install @mbcorai/language-switcher
 
 ## Configuration
 
-### 1 — Créez vos fichiers de traduction
+### 1 — Create your translation files
 
 #### `fr.json`
 
@@ -55,7 +55,7 @@ npm install @mbcorai/language-switcher
 }
 ```
 
-### 2 — Enveloppez votre application avec `LanguageProvider`
+### 2 — Wrap your application with `LanguageProvider`
 
 #### `app/layout.tsx`
 
@@ -88,9 +88,9 @@ export default function RootLayout({
 }
 ```
 
-> Important : `LanguageProvider` doit entourer les composants qui utilisent `useLanguage()` ou `Translate`.
+> Important: `LanguageProvider` must enclose components that use `useLanguage()` or `Translate`.
 
-### 3 — Utilisez les composants
+### 3 — Use the components
 
 #### `app/page.tsx`
 
@@ -120,12 +120,12 @@ export default function HomePage() {
 
 Props :
 
-- `translations`: objet de ressources de traduction
-- `defaultLanguage`: langue par défaut
+- `translations`: translation resource object
+- `defaultLanguage`: default language
 
 ### `LanguageSwitcher`
 
-Affiche un sélecteur de langue.
+Displays a language selector.
 
 ```tsx
 <LanguageSwitcher />
@@ -133,7 +133,7 @@ Affiche un sélecteur de langue.
 
 ### `Translate`
 
-Affiche du texte traduit pour un identifiant donné.
+Displays translated text for a given ID.
 
 ```tsx
 <Translate id="home.title" />
@@ -141,15 +141,15 @@ Affiche du texte traduit pour un identifiant donné.
 
 ### `useLanguage()`
 
-Permet d'accéder au contexte de langue et de changer la langue.
+Allows access to the language context and the ability to change the language.
 
 ```tsx
 const { language, changeLanguage } = useLanguage()
 ```
 
-## Développement local
+## Local Development
 
-Pour tester le package localement dans un autre projet :
+To test the package locally in another project:
 
 ```bash
 npm install ../language-switcher
@@ -167,11 +167,11 @@ npm run build
 npm publish --access public
 ```
 
-## Notes importantes
+## Important Notes
 
-- `react` doit être installé en peer dependency
-- `LanguageProvider` doit envelopper les composants côté client
-- `LanguageSwitcher` utilise le hook `useLanguage()` interne
+- `react` must be installed as a peer dependency
+- `LanguageProvider` must wrap client-side components
+- `LanguageSwitcher` uses the internal `useLanguage()` hook
 
 ## Auteur
 

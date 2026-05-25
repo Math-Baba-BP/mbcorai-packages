@@ -2,25 +2,25 @@ import i18n from "i18next";
 import { initReactI18next, } from "react-i18next";
 
 /**
- * Initialise i18next avec les traductions et la langue par défaut.
- * Cette fonction permet de configurer tout le système de traduction du package.
- */
+* Initializes i18next with the default translations and language.
+* This function allows you to configure the entire translation system of the package.
+*/
 export function initializeI18n(
-    translations: Record<string, any>,          // Objet contenant toutes les traductions
-    defaultlanguage: string                     // Langue par défaut de l'application
+    translations: Record<string, any>,          // Object containing all translations
+    defaultlanguage: string                     // Application default language
 ){
-     // Connecte i18next à React
+     // Connect i18next to React
     i18n.use(
         initReactI18next
     )
 
-    // Initialisation complète de i18next
+    // Complete initialization of i18next
     i18n.init({
-        resources: translations,                // Toutes les ressources de traduction
-        lng: defaultlanguage,                   // Langue active actuelle
-        fallbackLng: defaultlanguage,           // Langue de secours utilisée si une traduction manque
+        resources: translations,                // All translation resources
+        lng: defaultlanguage,                   // Current active language
+        fallbackLng: defaultlanguage,           // Backup language used if a translation is missing
         interpolation: { 
-            escapeValue: false,                 // Désactive l'échappement HTML automatique
+            escapeValue: false,                 // Disable automatic HTML escaping
         },
     })
 

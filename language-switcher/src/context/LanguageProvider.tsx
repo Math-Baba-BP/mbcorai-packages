@@ -5,7 +5,7 @@ import i18n from "i18next"
 import { initializeI18n } from "../lib/i18n"
 import { LanguageContextType, ProviderProps } from "../types/LanguageSwitcherType"
 
-// Création du contexte global de langue
+// Creation of the overall language context
 const LanguageContext = createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ 
@@ -14,24 +14,24 @@ export function LanguageProvider({
     defaultLanguage, 
 }: ProviderProps) {
 
-    // Initialise i18n immédiatement si nécessaire pour éviter
-    // que les composants affichent les clés de traduction.
+    // Initialize i18n immediately if necessary to prevent
+    // components from displaying translation keys.
     if (!i18n.isInitialized) {
         initializeI18n(translations, defaultLanguage)
     }
 
     const [language, setLanguage] = useState<string>(() => i18n.language || defaultLanguage)
 
-    // Exécuté après le premier render React.
-    // Sert à récupérer la langue sauvegardée.
+    // Executed after the first React render.
+    // Used to retrieve the saved language.
     useEffect(() => {
         if (typeof window === "undefined") return
 
         const savedLanguage = localStorage.getItem("language")
         const currentLanguage = savedLanguage || defaultLanguage
 
-        // Vérifie si la langue doit être changée.
-        // Évite les appels inutiles.
+        // Checks if the language needs to be changed.
+        // Avoids unnecessary calls.
         if (i18n.language !== currentLanguage) {
             i18n.changeLanguage(currentLanguage)
         }
