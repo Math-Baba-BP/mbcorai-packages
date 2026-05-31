@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ucr-primary: #000000;
+  --ucr-background: #ffffff;
+  --ucr-foreground: #111827;
+  --ucr-radius: 0.75rem;
+}
+
+.ucr-root {
+  color: var(--ucr-foreground);
+  background: var(--ucr-background);
+}
