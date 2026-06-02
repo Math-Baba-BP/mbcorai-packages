@@ -184,12 +184,26 @@ export default async function Page() {
 
 ### Protect a server component
 
+In the LoginPage, change the path of the redirectTo (example: redirectTo="/auth/redirect")
+
 ```ts
+// app/auth/redirect/page.tsx (Example)
 import { getAuthSession } from "@mbcorai/user-crud-management/server"
 import { redirect } from "next/navigation"
 
-const session = await getAuthSession()
-if (!session?.user) redirect("/login")
+export default async function AuthRedirectPage() {
+    const session = await getAuthSession()
+
+    if (!session?.user) {
+        redirect("/login")
+    }
+
+    if (session.user.role === "ADMIN") {
+        redirect("/dashboard")
+    }
+
+    redirect("/chat")
+}
 ```
 
 ### Override default styles
