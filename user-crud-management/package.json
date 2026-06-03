@@ -1,6 +1,6 @@
 {
   "name": "@Math-Baba-BP/user-crud-management",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -19,6 +19,7 @@
       "import": "./dist/auth/index.js"
     },
     "./styles": "./dist/styles/index.css",
+    "./types": "./dist/types/next-auth.d.ts",
     "./dashboard": {
       "types": "./dist/dashboard/index.d.ts",
       "import": "./dist/dashboard/index.js"

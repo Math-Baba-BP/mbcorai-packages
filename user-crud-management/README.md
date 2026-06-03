@@ -151,16 +151,22 @@ export const config = {
 }
 ```
 
-### 9. Add transpilePackages
+### 9. Activate the session types
 
-In your `next.config.ts`:
+The package ships a type augmentation that adds `role` to `session.user`. Without it, TypeScript won't know about the `role` field.
+
+Create a `global.d.ts` at the root of your project:
 
 ```ts
-const nextConfig = {
-    transpilePackages: ["@Math-Baba-BP/user-crud-management"],
-}
+/// <reference types="@Math-Baba-BP/user-crud-management/types" />
+```
 
-export default nextConfig
+Make sure this file is picked up by your `tsconfig.json`:
+
+```json
+{
+  "include": ["global.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
 ```
 
 ### 10. Seed an admin user
@@ -276,6 +282,28 @@ The middleware runs in the Edge Runtime and has no access to your app modules �
 
 ---
 
+### `Property 'role' does not exist on type 'User'`
+
+The package ships a `next-auth` type augmentation that adds `role` to `session.user`, but it needs to be explicitly referenced in your project.
+
+Create a `global.d.ts` at the root of your project:
+
+```ts
+/// <reference types="@Math-Baba-BP/user-crud-management/types" />
+```
+
+Then make sure `global.d.ts` is included in your `tsconfig.json`:
+
+```json
+{
+  "include": ["global.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
+```
+
+If the error persists after adding the file, restart the TypeScript server in your editor (VS Code: `Ctrl+Shift+P` → *TypeScript: Restart TS Server*).
+
+---
+
 ### `CLIENT_FETCH_ERROR: Cannot convert undefined or null to object`
 
 This usually means the auth session endpoint (`/api/auth/session`) is returning HTML instead of JSON — which happens when the auth route is broken.
@@ -315,7 +343,7 @@ Do **not** try `@import "@Math-Baba-BP/user-crud-management/styles"` — Tailwin
 
 ### `createContext` error in a Server Component
 
-This happens when you import `UserCrudDashboard` from the wrong entry point. The `/server` bundle must never include client components.
+This happens when you import `UserCrudDashboard` from the wrong entry point.
 
 ```ts
 // correct
@@ -325,18 +353,16 @@ import { UserCrudDashboard } from "@Math-Baba-BP/user-crud-management/dashboard"
 import { UserCrudDashboard } from "@Math-Baba-BP/user-crud-management/server"
 ```
 
-Also make sure `transpilePackages` is set in `next.config.ts` (see step 8 of installation).
-
 ---
 
 ### `revalidatePath` / server action called in a client bundle
 
-You imported a server-only export (like `getUsers` or a server action) inside a Client Component or inside a file that ends up in the client bundle.
+You imported a server-only export inside a Client Component or a file that ends up in the client bundle.
 
 Rule of thumb:
 - `@Math-Baba-BP/user-crud-management/server` → only in Server Components, API routes, and server actions
 - `@Math-Baba-BP/user-crud-management/client` → only in Client Components
-- `@Math-Baba-BP/user-crud-management/dashboard` → Server Component, import via `transpilePackages`
+- `@Math-Baba-BP/user-crud-management/dashboard` → Server Component only
 - `@Math-Baba-BP/user-crud-management/auth` → only in `middleware.ts`
 
 ---
@@ -346,6 +372,26 @@ Rule of thumb:
 This error means "record not found". It is not a bug — it simply means you tried to delete a user that does not exist anymore (e.g. already deleted, or stale UI). The package handles this gracefully; just refresh the page.
 
 ---
+
+### Seed fails with unique constraint error
+
+```
+PrismaClientKnownRequestError: Unique constraint failed on the fields: (`email`)
+```
+
+The admin user already exists in the database. The seed is safe to ignore — your admin account is already there.
+
+---
+
+### `next-auth` v4 and v5 conflict
+
+If you had `next-auth` v4 installed before, make sure you upgraded to v5:
+
+```bash
+npm install next-auth@^5.0.0-beta.30
+```
+
+Mixing v4 and v5 causes silent auth failures and session errors.
 
 ---
 
@@ -369,6 +415,8 @@ This generates:
 - `dist/client/index.js` — client components (`"use client"` auto-injected)
 - `dist/server/index.js` — server utilities and NextAuth handlers
 - `dist/auth/index.js` — middleware-safe auth helpers
+- `dist/dashboard/index.js` — dashboard component (compiled, no transpilePackages needed)
+- `dist/types/next-auth.d.ts` — `next-auth` type augmentation (`session.user.role`)
 - `dist/styles/index.css` — Tailwind v4 `@source` directive
 
 To watch and rebuild on change:
@@ -380,29 +428,7 @@ npm run dev
 ### Seed an admin user (dev)
 
 ```bash
-npx tsx src/db/seeds/seed-admin.ts
+npm run prisma:seed
 ```
 
 Default credentials: `admin@example.com` / `Admin1234!`
-
----
-
-### Seed fails with unique constraint error
-
-```
-PrismaClientKnownRequestError: Unique constraint failed on the fields: (`email`)
-```
-
-The admin user already exists in the database. The seed is safe to ignore — your admin account is already there.
-
----
-
-### `next-auth` v4 and v5 conflict
-
-If you had `next-auth` v4 installed before, make sure you upgraded to v5:
-
-```bash
-npm install next-auth@^5.0.0-beta.30
-```
-
-Mixing v4 and v5 causes silent auth failures and session errors.

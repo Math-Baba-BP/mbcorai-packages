@@ -35,12 +35,18 @@ export default defineConfig([
     dts: true,
     clean: false,
     onSuccess: async () => {
+      const { mkdirSync, writeFileSync, copyFileSync } = await import("fs");
+
       // Génère le fichier CSS que les consommateurs importent dans leur globals.css.
-      // @source "../" pointe vers dist/ (relatif à dist/styles/index.css dans node_modules)
-      // Tailwind v4 scanne ainsi tous les fichiers compilés du package pour trouver les classes.
-      const { mkdirSync, writeFileSync } = await import("fs");
       mkdirSync("./dist/styles", { recursive: true });
       writeFileSync("./dist/styles/index.css", '@source "../";\n');
+
+      // Copie l'augmentation next-auth dans dist/types/ pour que le host ait role sur session.user
+      mkdirSync("./dist/types", { recursive: true });
+      copyFileSync(
+        "./src/auth/types/next-auth.d.ts",
+        "./dist/types/next-auth.d.ts"
+      );
     },
   },
 ]);
