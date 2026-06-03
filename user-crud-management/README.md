@@ -1,4 +1,4 @@
-# @mbcorai/user-crud-management
+# @Math-Baba-BP/user-crud-management
 
 A plug-and-play user management package for Next.js apps. Includes authentication (login / logout), a user CRUD dashboard, and role-based access control — all styled with Tailwind CSS and ready to drop in.
 
@@ -29,7 +29,7 @@ A plug-and-play user management package for Next.js apps. Includes authenticatio
 ### 1. Install the package and its peer dependencies
 
 ```bash
-npm install @mbcorai/user-crud-management
+npm install @Math-Baba-BP/user-crud-management
 ```
 
 This package requires the following peer dependencies — install any you don't already have:
@@ -90,7 +90,7 @@ openssl rand -base64 32
 Create `lib/user-crud.ts` in your app:
 
 ```ts
-import { configureUserCrudManagement } from "@mbcorai/user-crud-management/server"
+import { configureUserCrudManagement } from "@Math-Baba-BP/user-crud-management/server"
 import { prisma } from "@/lib/prisma" // your existing Prisma client
 
 configureUserCrudManagement({ prisma })
@@ -109,7 +109,7 @@ Create `app/api/auth/[...nextauth]/route.ts`:
 
 ```ts
 import "@/lib/user-crud"
-import { handlers } from "@mbcorai/user-crud-management/server"
+import { handlers } from "@Math-Baba-BP/user-crud-management/server"
 
 export const { GET, POST } = handlers
 ```
@@ -120,7 +120,7 @@ In your `app/globals.css`:
 
 ```css
 @import "tailwindcss";
-@source "../node_modules/@mbcorai/user-crud-management/dist";
+@source "../node_modules/@Math-Baba-BP/user-crud-management/dist";
 ```
 
 ### 7. Add the middleware
@@ -128,7 +128,7 @@ In your `app/globals.css`:
 Create `middleware.ts` at the root of your app:
 
 ```ts
-import { createAuthMiddleware } from "@mbcorai/user-crud-management/auth"
+import { createAuthMiddleware } from "@Math-Baba-BP/user-crud-management/auth"
 
 export default createAuthMiddleware({
     loginPath: "/login",
@@ -146,7 +146,7 @@ In your `next.config.ts`:
 
 ```ts
 const nextConfig = {
-    transpilePackages: ["@mbcorai/user-crud-management"],
+    transpilePackages: ["@Math-Baba-BP/user-crud-management"],
 }
 
 export default nextConfig
@@ -155,7 +155,7 @@ export default nextConfig
 ### 9. Seed an admin user
 
 ```bash
-npx tsx node_modules/@mbcorai/user-crud-management/src/db/seeds/seed-admin.ts
+npx tsx node_modules/@Math-Baba-BP/user-crud-management/src/db/seeds/seed-admin.ts
 ```
 
 Default credentials: `admin@example.com` / `Admin1234!`
@@ -170,7 +170,7 @@ Default credentials: `admin@example.com` / `Admin1234!`
 // app/login/page.tsx
 "use client"
 
-import { LoginPage } from "@mbcorai/user-crud-management/client"
+import { LoginPage } from "@Math-Baba-BP/user-crud-management/client"
 
 export default function Page() {
     return <LoginPage redirectTo="/dashboard" />
@@ -181,8 +181,8 @@ export default function Page() {
 
 ```tsx
 // app/dashboard/page.tsx
-import { getUsers } from "@mbcorai/user-crud-management/server"
-import { UserCrudDashboard } from "@mbcorai/user-crud-management/dashboard"
+import { getUsers } from "@Math-Baba-BP/user-crud-management/server"
+import { UserCrudDashboard } from "@Math-Baba-BP/user-crud-management/dashboard"
 
 export default async function Page() {
     const users = await getUsers()
@@ -196,7 +196,7 @@ In the LoginPage, change the path of the redirectTo (example: redirectTo="/auth/
 
 ```ts
 // app/auth/redirect/page.tsx (Example)
-import { getAuthSession } from "@mbcorai/user-crud-management/server"
+import { getAuthSession } from "@Math-Baba-BP/user-crud-management/server"
 import { redirect } from "next/navigation"
 
 export default async function AuthRedirectPage() {
@@ -221,7 +221,7 @@ Wrap your app (or just the dashboard) with `UserCrudStyleProvider` and pass cust
 ```tsx
 "use client"
 
-import { UserCrudStyleProvider } from "@mbcorai/user-crud-management/client"
+import { UserCrudStyleProvider } from "@Math-Baba-BP/user-crud-management/client"
 
 export function Providers({ children }) {
     return (
@@ -257,7 +257,7 @@ import "@/lib/user-crud"
 ```ts
 // app/api/auth/[...nextauth]/route.ts
 import "@/lib/user-crud"  // ← required, layout does NOT run for API routes
-import { handlers } from "@mbcorai/user-crud-management/server"
+import { handlers } from "@Math-Baba-BP/user-crud-management/server"
 export const { GET, POST } = handlers
 ```
 
@@ -295,10 +295,10 @@ You must explicitly tell Tailwind to scan the package dist files. In your `app/g
 
 ```css
 @import "tailwindcss";
-@source "../node_modules/@mbcorai/user-crud-management/dist";
+@source "../node_modules/@Math-Baba-BP/user-crud-management/dist";
 ```
 
-Do **not** try `@import "@mbcorai/user-crud-management/styles"` — Tailwind v4's CSS resolver does not support package export maps for `@import`.
+Do **not** try `@import "@Math-Baba-BP/user-crud-management/styles"` — Tailwind v4's CSS resolver does not support package export maps for `@import`.
 
 ---
 
@@ -308,10 +308,10 @@ This happens when you import `UserCrudDashboard` from the wrong entry point. The
 
 ```ts
 // correct
-import { UserCrudDashboard } from "@mbcorai/user-crud-management/dashboard"
+import { UserCrudDashboard } from "@Math-Baba-BP/user-crud-management/dashboard"
 
 // wrong — this pulls in React context into the server bundle
-import { UserCrudDashboard } from "@mbcorai/user-crud-management/server"
+import { UserCrudDashboard } from "@Math-Baba-BP/user-crud-management/server"
 ```
 
 Also make sure `transpilePackages` is set in `next.config.ts` (see step 8 of installation).
@@ -323,10 +323,10 @@ Also make sure `transpilePackages` is set in `next.config.ts` (see step 8 of ins
 You imported a server-only export (like `getUsers` or a server action) inside a Client Component or inside a file that ends up in the client bundle.
 
 Rule of thumb:
-- `@mbcorai/user-crud-management/server` → only in Server Components, API routes, and server actions
-- `@mbcorai/user-crud-management/client` → only in Client Components
-- `@mbcorai/user-crud-management/dashboard` → Server Component, import via `transpilePackages`
-- `@mbcorai/user-crud-management/auth` → only in `middleware.ts`
+- `@Math-Baba-BP/user-crud-management/server` → only in Server Components, API routes, and server actions
+- `@Math-Baba-BP/user-crud-management/client` → only in Client Components
+- `@Math-Baba-BP/user-crud-management/dashboard` → Server Component, import via `transpilePackages`
+- `@Math-Baba-BP/user-crud-management/auth` → only in `middleware.ts`
 
 ---
 
