@@ -1,7 +1,6 @@
 {
-  "name": "@mbcorai/user-crud-management",
-  "version": "1.0.0",
-  "private": false,
+  "name": "@Math-Baba-BP/user-crud-management",
+  "version": "1.0.6",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -11,32 +10,32 @@
       "types": "./dist/client/index.d.ts",
       "import": "./dist/client/index.js"
     },
-
     "./server": {
       "types": "./dist/server/index.d.ts",
       "import": "./dist/server/index.js"
     },
-
     "./auth": {
       "types": "./dist/auth/index.d.ts",
       "import": "./dist/auth/index.js"
     },
-
     "./styles": "./dist/styles/index.css",
-
     "./dashboard": {
       "import": "./src/dashboard/dashboard-page.tsx"
     }
   },
-  "files": [
-    "dist"
-  ],
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "engines": {
-    "node": ">=20"
+  "files": ["dist"],
+  "sideEffects": ["**/*.css"],
+  "engines": { "node": ">=20" },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Math-Baba-BP/user-crud-management.git"
   },
+
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -50,38 +49,59 @@
   "prisma": {
     "schema": "src/db/prisma/schema.prisma"
   },
+
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
-    "@hookform/resolvers": "^5.4.0",
     "@prisma/client": "^6.16.0",
-    "@tanstack/react-query": "^5.100.14",
-    "@tanstack/react-table": "^8.21.3",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
-    "next-auth": "^5.0.0-beta.30",
-    "react-hook-form": "^7.76.1",
-    "tailwind-merge": "^3.6.0",
-    "zod": "^4.4.3"
+    "tailwind-merge": "^3.6.0"
   },
+
   "peerDependencies": {
-    "next": "^15",
+    "next": ">=15",
+    "next-auth": "^5.0.0-beta.25",
     "react": "^18.2.0 || ^19.0.0",
     "react-dom": "^18.2.0 || ^19.0.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": ">=3.4",
+    "@hookform/resolvers": "^5.0.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-table": "^8.0.0",
+    "react-hook-form": "^7.0.0",
+    "zod": "^3.0.0 || ^4.0.0"
   },
+
+  "peerDependenciesMeta": {
+    "next-auth": { "optional": false },
+    "@hookform/resolvers": { "optional": false },
+    "@tanstack/react-query": { "optional": false },
+    "@tanstack/react-table": { "optional": false },
+    "react-hook-form": { "optional": false },
+    "zod": { "optional": false }
+  },
+
   "devDependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@tanstack/react-query": "^5.100.14",
+    "@tanstack/react-table": "^8.21.3",
     "@types/node": "^20",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "^15",
+    "next": "^15",
+    "next-auth": "^5.0.0-beta.30",
     "postcss": "^8",
     "prettier": "^3",
     "prisma": "^6.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.76.1",
     "tailwindcss": "^3.4.17",
     "tsup": "^8",
     "tsx": "^4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^4.4.3"
   }
 }

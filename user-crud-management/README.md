@@ -26,11 +26,19 @@ A plug-and-play user management package for Next.js apps. Includes authenticatio
 
 ## Installation
 
-### 1. Install the package
+### 1. Install the package and its peer dependencies
 
 ```bash
 npm install @mbcorai/user-crud-management
 ```
+
+This package requires the following peer dependencies — install any you don't already have:
+
+```bash
+npm install next-auth@^5.0.0-beta.30 @tanstack/react-query @tanstack/react-table react-hook-form @hookform/resolvers zod
+```
+
+> **Auth.js v5** (`next-auth@^5.0.0-beta.x`) is required. v4 is not compatible.
 
 ### 2. Add the Prisma model to your schema
 
@@ -325,6 +333,46 @@ Rule of thumb:
 ### `PrismaClientKnownRequestError P2025` on delete
 
 This error means "record not found". It is not a bug — it simply means you tried to delete a user that does not exist anymore (e.g. already deleted, or stale UI). The package handles this gracefully; just refresh the page.
+
+---
+
+---
+
+## Contributing / Local development
+
+### Build the package
+
+The package is compiled with [tsup](https://tsup.egoist.dev). Install dev dependencies first:
+
+```bash
+npm install
+```
+
+Then build:
+
+```bash
+npm run build
+```
+
+This generates:
+- `dist/client/index.js` — client components (`"use client"` auto-injected)
+- `dist/server/index.js` — server utilities and NextAuth handlers
+- `dist/auth/index.js` — middleware-safe auth helpers
+- `dist/styles/index.css` — Tailwind v4 `@source` directive
+
+To watch and rebuild on change:
+
+```bash
+npm run dev
+```
+
+### Seed an admin user (dev)
+
+```bash
+npx tsx src/db/seeds/seed-admin.ts
+```
+
+Default credentials: `admin@example.com` / `Admin1234!`
 
 ---
 
