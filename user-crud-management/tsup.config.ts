@@ -30,6 +30,7 @@ export default defineConfig([
     entry: {
       "server/index": "src/server/index.ts",
       "auth/index": "src/auth/index.ts",
+      "dashboard/index": "src/dashboard/index.ts",
     },
     dts: true,
     clean: false,

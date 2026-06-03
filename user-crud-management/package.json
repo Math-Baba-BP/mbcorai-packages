@@ -20,7 +20,8 @@
     },
     "./styles": "./dist/styles/index.css",
     "./dashboard": {
-      "import": "./src/dashboard/dashboard-page.tsx"
+      "types": "./dist/dashboard/index.d.ts",
+      "import": "./dist/dashboard/index.js"
     }
   },
   "files": ["dist"],

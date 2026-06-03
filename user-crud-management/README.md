@@ -26,7 +26,18 @@ A plug-and-play user management package for Next.js apps. Includes authenticatio
 
 ## Installation
 
-### 1. Install the package and its peer dependencies
+### 1. Configure GitHub Packages registry
+
+This package is hosted on GitHub Packages. Create or update a `.npmrc` file at the root of your project:
+
+```
+@Math-Baba-BP:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+> Generate a token at **GitHub → Settings → Developer settings → Personal access tokens** with the `read:packages` scope.
+
+### 2. Install the package and its peer dependencies
 
 ```bash
 npm install @Math-Baba-BP/user-crud-management
@@ -40,7 +51,7 @@ npm install next-auth@^5.0.0-beta.30 @tanstack/react-query @tanstack/react-table
 
 > **Auth.js v5** (`next-auth@^5.0.0-beta.x`) is required. v4 is not compatible.
 
-### 2. Add the Prisma model to your schema
+### 3. Add the Prisma model to your schema
 
 In your `prisma/schema.prisma`, add:
 
@@ -69,7 +80,7 @@ Then run:
 npx prisma migrate dev --name add-user-crud
 ```
 
-### 3. Set environment variables
+### 4. Set environment variables
 
 In your `.env`:
 
@@ -85,7 +96,7 @@ Generate a secret:
 openssl rand -base64 32
 ```
 
-### 4. Configure the package
+### 5. Configure the package
 
 Create `lib/user-crud.ts` in your app:
 
@@ -103,7 +114,7 @@ Import it in your root layout so it runs on every server request:
 import "@/lib/user-crud"
 ```
 
-### 5. Add the auth API route
+### 6. Add the auth API route
 
 Create `app/api/auth/[...nextauth]/route.ts`:
 
@@ -114,7 +125,7 @@ import { handlers } from "@Math-Baba-BP/user-crud-management/server"
 export const { GET, POST } = handlers
 ```
 
-### 6. Add Tailwind source scanning
+### 7. Add Tailwind source scanning
 
 In your `app/globals.css`:
 
@@ -123,7 +134,7 @@ In your `app/globals.css`:
 @source "../node_modules/@Math-Baba-BP/user-crud-management/dist";
 ```
 
-### 7. Add the middleware
+### 8. Add the middleware
 
 Create `middleware.ts` at the root of your app:
 
@@ -140,7 +151,7 @@ export const config = {
 }
 ```
 
-### 8. Add transpilePackages
+### 9. Add transpilePackages
 
 In your `next.config.ts`:
 
@@ -152,7 +163,7 @@ const nextConfig = {
 export default nextConfig
 ```
 
-### 9. Seed an admin user
+### 10. Seed an admin user
 
 ```bash
 npx tsx node_modules/@Math-Baba-BP/user-crud-management/src/db/seeds/seed-admin.ts
